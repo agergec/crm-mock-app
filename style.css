@@ -9,7 +9,7 @@
     /* Subtle blue for active states if needed */
     --hover-bg: #f9fafb;
     --font-family: 'Inter', sans-serif;
-    --sidebar-width: 240px;
+    --sidebar-width: 180px;
     --header-height: 50px;
 }
 
