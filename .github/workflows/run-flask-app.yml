@@ -1,0 +1,74 @@
+name: Run Flask CRM Mock App
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  run-flask-app:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Start Flask app in background
+      run: |
+        python app.py &
+        FLASK_PID=$!
+        echo "FLASK_PID=$FLASK_PID" >> $GITHUB_ENV
+        # Give the app time to start
+        sleep 5
+        
+    - name: Health check - Test root endpoint
+      run: |
+        curl -f http://localhost:5001/ || exit 1
+        echo "✓ Root endpoint is working"
+        
+    - name: Health check - Test query parameter endpoint
+      run: |
+        curl -f "http://localhost:5001/?user_qry=1" || exit 1
+        echo "✓ Query parameter endpoint is working"
+        
+    - name: Test JSON API endpoint
+      run: |
+        # Test valid user
+        response=$(curl -s -H "Accept: application/json" http://localhost:5001/users/1)
+        echo "Response: $response"
+        if echo "$response" | grep -q '"name"'; then
+          echo "✓ JSON API returned user data"
+        else
+          echo "✗ JSON API did not return expected user data"
+          exit 1
+        fi
+        
+    - name: Test JSON API 404 handling
+      run: |
+        # Test non-existent user
+        status_code=$(curl -s -H "Accept: application/json" -w "%{http_code}" -o /dev/null http://localhost:5001/users/999)
+        if [ "$status_code" -eq 404 ]; then
+          echo "✓ JSON API correctly returns 404 for non-existent user"
+        else
+          echo "✗ Expected 404, got $status_code"
+          exit 1
+        fi
+        
+    - name: Stop Flask app
+      if: always()
+      run: |
+        if [ ! -z "$FLASK_PID" ]; then
+          kill $FLASK_PID || true
+        fi

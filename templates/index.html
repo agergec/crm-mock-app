@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="widgets-grid">
+    {% if found_user %}
+    <div class="card" id="user-details-card">
+        <h2>User Details</h2>
+        <div class="user-info">
+            <div class="user-main-details">
+                <p><strong>Name:</strong> {{ found_user.name }}</p>
+                <p><strong>Username:</strong> {{ found_user.username }}</p>
+                <p><strong>Email:</strong> {{ found_user.email }}</p>
+                <p><strong>Phone:</strong> {{ found_user.phone }}</p>
+                <p><strong>Website:</strong> {{ found_user.website }}</p>
+            </div>
+
+            <div class="nested-box company-box">
+                <h3>Company</h3>
+                <p><strong>Name:</strong> {{ found_user.company.name }}</p>
+                <p><strong>Catch Phrase:</strong> {{ found_user.company.catchPhrase }}</p>
+                <p><strong>BS:</strong> {{ found_user.company.bs }}</p>
+            </div>
+
+            <div class="nested-box address-box">
+                <h3>Address</h3>
+                <p>{{ found_user.address.street }}</p>
+                <p>{{ found_user.address.suite }}</p>
+                <p>{{ found_user.address.city }}, {{ found_user.address.zipcode }}</p>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <h2>Incoming Parameters</h2>
+        <div class="param-table-container">
+            {% if query_params %}
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in query_params.items() %}
+                    <tr>
+                        <td class="key-col">{{ key }}</td>
+                        <td class="value-col">{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <p>No parameters received.</p>
+                <small>Try adding ?client=Acme&status=Active to the URL</small>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Mock Widgets for CRM feel -->
+    <div class="card">
+        <h2>Recent Activity</h2>
+        <ul class="activity-list">
+            <li>Customer <strong>John Doe</strong> viewed invoice #302</li>
+            <li>New lead <strong>Acme Corp</strong> added</li>
+            <li>Meeting scheduled with <strong>Jane Smith</strong></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
