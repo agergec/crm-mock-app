@@ -191,3 +191,59 @@ body {
 .activity-list li:last-child {
     border-bottom: none;
 }
+
+/* User Details Styling */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.user-info p {
+    margin-bottom: 4px;
+}
+
+.user-main-details {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 8px;
+}
+
+.nested-box {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nested-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nested-box h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.company-box {
+    border-left: 4px solid var(--accent-color);
+    background: linear-gradient(to right, #f8fbff, #ffffff);
+}
+
+.address-box {
+    border-left: 4px solid #10b981;
+    /* Emerald green */
+    background: linear-gradient(to right, #f0fdf4, #ffffff);
+}
