@@ -1,15 +1,15 @@
 # CRM Mock App
 
-A lightweight Flask-based mock CRM (Customer Relationship Management) application designed for testing, demonstrations, and development purposes. This application provides both a web interface and a REST API for managing user data.
+A lightweight Flask-based mock CRM (Customer Relationship Management) application designed for demonstrations of Contact Center and CRM app integrations. This application provides both a web interface and a REST API to use in demo.
 
 ## Purpose
 
 This mock CRM app serves as:
 - **Testing Tool** - Simulate CRM interactions without a full production system
-- **API Endpoint Provider** - RESTful API for integration testing
+- **API Endpoint Provider** - RESTful API for integration demonstration
 - **Learning Resource** - Simple example of Flask web application with REST API
-- **Demo Application** - Showcase CRM features with mock data
-- **Development Base** - Starting point for building CRM-like applications
+- **Demo Application** - Showcase how to populate CRM pages through query string and retrieve customer data using REST API
+- **Development Base** - Starting point for integrating application with CRM-like applications
 
 ## Features
 
@@ -24,7 +24,7 @@ This mock CRM app serves as:
 - Proper HTTP status codes (200 for success, 404 for not found)
 - Clean JSON responses
 
-### 📱 Standalone SPA
+### 📱 Standalone Single Page Application (SPA)
 - Client-side single-page application
 - Works without backend server
 - JavaScript-based user lookup
