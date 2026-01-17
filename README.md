@@ -78,11 +78,17 @@ This mock CRM app serves as:
 ```
 http://localhost:5001/
 ```
+```
+https://agergec.github.io/crm-mock-app
+```
 Displays the main dashboard with incoming parameters.
 
 #### Query Parameters
 ```
 http://localhost:5001/?client=Acme&status=Active&priority=High
+```
+```
+https://agergec.github.io/crm-mock-app/?client=Acme&status=Active&priority=High
 ```
 Any query parameters are displayed in a table on the dashboard.
 
@@ -90,11 +96,17 @@ Any query parameters are displayed in a table on the dashboard.
 ```
 http://localhost:5001/?user_qry=1
 ```
+```
+https://agergec.github.io/crm-mock-app/?user_qry=5
+```
 Displays detailed information for user with ID 1.
 
 #### User Lookup by Text ID
 ```
 http://localhost:5001/?user_qry_txt=5
+```
+```
+https://agergec.github.io/crm-mock-app/?user_qry_txt=5
 ```
 Displays detailed information for user with text ID "5".
 
