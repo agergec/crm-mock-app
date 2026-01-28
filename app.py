@@ -7,7 +7,7 @@ app = Flask(__name__)
 def load_people():
     try:
         # Assuming people.json is in crm-spa directory relative to project root
-        file_path = os.path.join(os.path.dirname(__file__), 'crm-spa', 'people.json')
+        file_path = os.path.join(os.path.dirname(__file__), 'people.json')
         with open(file_path, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
@@ -46,7 +46,7 @@ def user_detail(user_id):
 @app.route('/spa')
 def spa():
     """Serve the standalone SPA"""
-    spa_path = os.path.join(os.path.dirname(__file__), 'crm-spa', 'index.html')
+    spa_path = os.path.join(os.path.dirname(__file__), 'index.html')
     with open(spa_path, 'r') as f:
         return f.read()
 
@@ -54,7 +54,7 @@ def spa():
 def spa_static(filename):
     """Serve static files for the SPA (CSS, JS, JSON)"""
     from flask import send_from_directory
-    spa_dir = os.path.join(os.path.dirname(__file__), 'crm-spa')
+    spa_dir = os.path.dirname(__file__)
     return send_from_directory(spa_dir, filename)
 
 if __name__ == '__main__':

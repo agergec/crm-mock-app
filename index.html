@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%233b82f6' width='100' height='100' rx='20'/><rect fill='white' x='15' y='15' width='30' height='30' rx='5'/><rect fill='white' x='55' y='15' width='30' height='30' rx='5'/><rect fill='white' x='15' y='55' width='30' height='30' rx='5'/><rect fill='white' x='55' y='55' width='30' height='30' rx='5'/></svg>">
     <title>Mock CRM SPA</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +21,7 @@
                 <li><a href="#">Contacts</a></li>
                 <li><a href="#">Deals</a></li>
                 <li><a href="#">Settings</a></li>
+                <li><a href="#" id="help-link">Help</a></li>
             </ul>
         </nav>
         <main class="content">
@@ -71,6 +73,41 @@
                             <li>New lead <strong>Acme Corp</strong> added</li>
                             <li>Meeting scheduled with <strong>Jane Smith</strong></li>
                         </ul>
+                    </div>
+
+                    <div class="card" id="help-card" style="display: none;">
+                        <h2>Usage Guide</h2>
+                        <div class="help-content">
+                            <div class="nested-box" style="border-left: 4px solid #3b82f6; background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent);">
+                                <h3>SPA Mode (Static Files)</h3>
+                                <p>Open <code>index.html</code> directly in any browser or serve via any HTTP server. No backend required.</p>
+                                <p><strong>Query Parameters:</strong></p>
+                                <ul class="activity-list">
+                                    <li>Any <code>?key=value</code> pairs are displayed in the "Incoming Parameters" table</li>
+                                    <li><code>?user_qry=&lt;id&gt;</code> - Lookup user by numeric ID (1-10)</li>
+                                    <li><code>?user_qry_txt=&lt;id&gt;</code> - Lookup user by text ID</li>
+                                </ul>
+                                <p><strong>Try these examples:</strong></p>
+                                <ul class="activity-list" id="spa-examples">
+                                    <!-- Populated by JavaScript -->
+                                </ul>
+                            </div>
+                            <div class="nested-box" style="border-left: 4px solid #10b981; background: linear-gradient(to right, rgba(16, 185, 129, 0.05), transparent); margin-top: 12px;">
+                                <h3>Web Service Mode (Flask/Python)</h3>
+                                <p>Requires Python 3.11+ and Flask. Run the server:</p>
+                                <p><code>python app.py</code></p>
+                                <p><strong>Endpoints:</strong></p>
+                                <ul class="activity-list">
+                                    <li><code>GET /</code> - Dashboard with query parameter support</li>
+                                    <li><code>GET /users/&lt;id&gt;</code> - REST API returning JSON user data</li>
+                                    <li><code>GET /spa</code> - Serves standalone SPA mode</li>
+                                </ul>
+                                <p><strong>Try these examples:</strong></p>
+                                <ul class="activity-list" id="api-examples">
+                                    <!-- Populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

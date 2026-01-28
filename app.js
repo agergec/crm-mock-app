@@ -1,6 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
     renderQueryParams();
+    setupHelpToggle();
+    populateHelpExamples();
 });
+
+function setupHelpToggle() {
+    const helpLink = document.getElementById('help-link');
+    const helpCard = document.getElementById('help-card');
+
+    if (helpLink && helpCard) {
+        helpLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (helpCard.style.display === 'none' || helpCard.style.display === '') {
+                helpCard.style.display = 'block';
+                helpLink.parentElement.classList.add('active');
+            } else {
+                helpCard.style.display = 'none';
+                helpLink.parentElement.classList.remove('active');
+            }
+        });
+    }
+}
+
+function populateHelpExamples() {
+    const baseUrl = window.location.origin + window.location.pathname;
+
+    // SPA mode examples
+    const spaExamples = document.getElementById('spa-examples');
+    if (spaExamples) {
+        const spaLinks = [
+            { params: '?client=Acme&status=Active', desc: 'Display parameters' },
+            { params: '?user_qry=1', desc: 'Lookup user by ID' },
+            { params: '?user_qry_txt=5', desc: 'Lookup user by text ID' }
+        ];
+        spaExamples.innerHTML = spaLinks.map(link =>
+            `<li><a href="${baseUrl}${link.params}">${baseUrl}${link.params}</a> - ${link.desc}</li>`
+        ).join('');
+    }
+
+    // API examples (for Flask mode)
+    const apiExamples = document.getElementById('api-examples');
+    if (apiExamples) {
+        const origin = window.location.origin;
+        const apiLinks = [
+            { path: '/?user_qry=1', desc: 'Dashboard with user lookup' },
+            { path: '/users/1', desc: 'REST API (JSON response)' },
+            { path: '/spa', desc: 'Standalone SPA mode' }
+        ];
+        apiExamples.innerHTML = apiLinks.map(link =>
+            `<li><a href="${origin}${link.path}">${origin}${link.path}</a> - ${link.desc}</li>`
+        ).join('');
+    }
+}
 
 function renderQueryParams() {
     const paramsBody = document.getElementById('params-body');
