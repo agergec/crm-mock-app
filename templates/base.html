@@ -12,12 +12,13 @@
 <body>
     <div class="app-container">
         <nav class="sidebar">
-            <div class="logo">CRM App</div>
+            <div class="logo">CRM Mock App</div>
             <ul class="nav-links">
                 <li class="active"><a href="#">Dashboard</a></li>
                 <li><a href="#">Contacts</a></li>
                 <li><a href="#">Deals</a></li>
                 <li><a href="#">Settings</a></li>
+                <li><a href="#" id="help-link">Help</a></li>
             </ul>
         </nav>
         <main class="content">
@@ -27,8 +28,43 @@
             </header>
             <div class="page-content">
                 {% block content %}{% endblock %}
+                <div class="card" id="help-card" style="display: none;">
+                    <h2>Usage Guide</h2>
+                    <div class="help-content">
+                        <div class="nested-box" style="border-left: 4px solid #3b82f6; background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent);">
+                            <h3>SPA Mode (Static Files)</h3>
+                            <p>Open <code>index.html</code> directly in any browser or serve via any HTTP server. No backend required.</p>
+                            <p><strong>Query Parameters:</strong></p>
+                            <ul class="activity-list">
+                                <li>Any <code>?key=value</code> pairs are displayed in the "Incoming Parameters" table</li>
+                                <li><code>?user_qry=&lt;id&gt;</code> - Lookup user by numeric ID (1-10)</li>
+                                <li><code>?user_qry_txt=&lt;id&gt;</code> - Lookup user by text ID</li>
+                            </ul>
+                            <p><strong>Try these examples:</strong></p>
+                            <ul class="activity-list" id="spa-examples">
+                                <!-- Populated by JavaScript -->
+                            </ul>
+                        </div>
+                        <div class="nested-box" style="border-left: 4px solid #10b981; background: linear-gradient(to right, rgba(16, 185, 129, 0.05), transparent); margin-top: 12px;">
+                            <h3>Web Service Mode (Flask/Python)</h3>
+                            <p>Requires Python 3.11+ and Flask. Run the server:</p>
+                            <p><code>python app.py</code></p>
+                            <p><strong>Endpoints:</strong></p>
+                            <ul class="activity-list">
+                                <li><code>GET /</code> - Dashboard with query parameter support</li>
+                                <li><code>GET /users/&lt;id&gt;</code> - REST API returning JSON user data</li>
+                                <li><code>GET /spa</code> - Serves standalone SPA mode</li>
+                            </ul>
+                            <p><strong>Try these examples:</strong></p>
+                            <ul class="activity-list" id="api-examples">
+                                <!-- Populated by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
