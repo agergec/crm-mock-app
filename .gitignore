@@ -1,4 +1,7 @@
 venv/
+.venv/
+.direnv/
+.claude/
 __pycache__/
 *.pyc
 *.pyo
@@ -8,4 +11,3 @@ __pycache__/
 *.swo
 *~
 .env
-.venv
